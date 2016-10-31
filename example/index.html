@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+<!--Scripts-->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="../simple-tmx-loader.js"></script>
+<script>
+
+$( document ).ready(function() {
+    var tmxLoaderCallback = function (tmxContent)
+    {
+        console.log(tmxContent)
+    };
+    var sPath = 'example.tmx';
+    new SimpleTmxLoader(sPath, tmxLoaderCallback);
+});
+
+</script>
+</body>
+
+</html>
