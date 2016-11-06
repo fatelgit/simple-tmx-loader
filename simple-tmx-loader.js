@@ -171,11 +171,11 @@ SimpleTmxLoader.prototype.Load = function()
             //get objectgroups an create them
             var aObjectGroup = self.$xml.find('*').filterNode("objectgroup");
             self.parseObjectgroups(aObjectGroup);
-
+            self.callback(self.tmxContent);
         }
     });
 
-    this.callback(this.tmxContent);
+
 };
 
 $.fn.filterNode = function (name) {

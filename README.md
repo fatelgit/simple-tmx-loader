@@ -1,4 +1,4 @@
-# simple-tmx-loader
+# Simple JavaScript TMX loader
 This is just a simple loader for tmx files in javascript. Inspired by this repository: https://github.com/evilangelist/tmx-loader.js
 
 ## Requirements
