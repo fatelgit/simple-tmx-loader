@@ -50,15 +50,37 @@ SimpleTmxLoader.Object = function(x, y, width, height, properties, gid, name)
 };
 SimpleTmxLoader.Layer = function(name, width, height, data, properties)
 {
+    this.parsedData = new Array(height);
+    this.width = width;
+    this.height = height;
+
+    for (var d = 0; d < height; ++d) {
+        this.parsedData[d] = new Array(width);
+    }
+    this.loadCSV(data);
     return {
         name: name,
-        width: width,
-        height: height,
-        data: data,
+        width: this.width,
+        height: this.height,
+        data: this.parsedData,
         properties: properties
     }
 };
 
+SimpleTmxLoader.Layer.prototype.trim = function(str) {
+    return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+};
+
+SimpleTmxLoader.Layer.prototype.loadCSV = function (data) {
+    var layerData = this.trim(data).split('\n');
+    for (var x = 0; x < layerData.length; ++x) {
+        var line = this.trim(layerData[x]);
+        var entries = line.split(',');
+        for (var e = 0; e < this.width; ++e) {
+            this.parsedData[x][e] = entries[e];
+        }
+    }
+};
 SimpleTmxLoader.prototype.parseProperties = function ($xml) {
     var properties = {};
     var aEle = $xml.find('*').filterNode("property");
@@ -174,7 +196,6 @@ SimpleTmxLoader.prototype.Load = function()
             self.callback(self.tmxContent);
         }
     });
-
 
 };
 
